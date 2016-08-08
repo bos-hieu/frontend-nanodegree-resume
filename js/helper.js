@@ -105,9 +105,12 @@ Start here! initializeMap() is called when page is loaded.
 function initializeMap() {
 
   var locations;
+  var SongThan = {lat: 10.877214, lng: 106.747522};
 
   var mapOptions = {
-    disableDefaultUI: true
+    //disableDefaultUI: true,
+    zoom: 4,
+    center: SongThan
   };
 
   /*
@@ -163,21 +166,23 @@ function initializeMap() {
 
     // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
+      position: SongThan,
       map: map,
-      position: placeData.geometry.location,
-      title: name
+      title: name,
     });
 
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
+    var inforString = '<div>Số 23, đường 6, khu phố 6, phường Bình Chiểu, quận Thủ Đức</div>'
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: inforString
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -239,11 +244,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
 //window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
+  //map.fitBounds(mapBounds);
 //});
